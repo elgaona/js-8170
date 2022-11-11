@@ -1,0 +1,15 @@
+name: Ampli Merge Check
+on: pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: amplitudeinc/ampli
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Check the Data branch is merged before merging the Git branch
+        run: ampli status --is-merged -t ${{secrets.AMPLI_TOKEN}}
